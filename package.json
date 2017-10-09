@@ -9,7 +9,13 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "sh deploy.sh"
+    "deploy": "sh deploy.sh",
+    "clean": "rm -rf dist && mkdir dist",
+    "copy:rollup": "cp -R src/index.aot.html dist/index.html && cp -R node_modules/core-js/client/shim.min.js dist/shim.min.js && cp -R node_modules/zone.js/dist/zone.js dist/zone.js",
+    "prebuild:rollup": "npm run clean && ./node_modules/.bin/rollup -c rollup-config.js",
+    "build:rollup": "npm run prebuild:rollup && npm run copy:rollup",
+    "prebuild:aot": "npm run clean && ./node_modules/.bin/ngc -p tsconfig-aot.json && ./node_modules/.bin/rollup -c rollup-config.js",
+    "build:aot": "npm run prebuild:aot && npm run copy:rollup"
   },
   "private": true,
   "dependencies": {
@@ -45,8 +51,15 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.1.2",
+    "rollup": "^0.50.0",
+    "rollup-plugin-angular": "^0.5.3",
+    "rollup-plugin-commonjs": "^8.2.1",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-typescript": "^0.8.1",
+    "rollup-plugin-uglify": "^2.0.1",
     "ts-node": "~3.0.4",
     "tslint": "~5.3.2",
-    "typescript": "~2.3.3"
+    "typescript": "~2.3.3",
+    "uglify-es": "github:mishoo/UglifyJS2#harmony-v3.1.3"
   }
 }
