@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
   selector: 'app-root',
@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // timer for auto-insert rows.
-    const subscription = this.timer.subscribe((counter) => {
+    const subscription: any = this.timer.subscribe((counter) => {
       this.list.push(
         Object.assign({}, this.list[counter], {
           age: this.reverseNumber(this.list[counter].age),
@@ -64,7 +64,7 @@ export class AppComponent implements OnInit {
     return moment(joining_date, 'DD/MM/YYYY').add(1, 'days').format('DD/MM/YYYY');
   }
 
-  private sortAsc(item1, item2) {
+  private sortAsc(item1: any, item2: any) {
     // This is a comparison function that will result in dates being sorted in
     // ASCENDING order. As you can see, JavaScript's native comparison operators
     // can be used to compare dates.
